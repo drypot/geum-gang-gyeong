@@ -1,0 +1,199 @@
+
+// macro
+
+$color: #333;
+$dim-color: lighten($color, 50%);
+$line-color: lighten($color, 70%);
+
+$width: 720px;
+$side-space: 8px;
+$layout-margin: 5rem;
+$margin: 3rem;
+
+@mixin narrow {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin normal {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin wide {
+  @media (min-width: 1400px) {
+    @content;
+  }
+}
+
+@mixin ac-link { // achromatic color link
+  a {
+    color: $color;
+  }
+}
+
+// base
+
+html {
+  font-size: 14px;
+  @include narrow {
+    font-size: 16px;
+  }
+  @include normal {
+    font-size: 18px;
+  }
+  @include wide {
+    font-size: 20px;
+  }
+}
+
+body {
+  font-size: 1rem;
+  font-family: serif;
+  line-height: 160%;
+  color: $color;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+h1, h2, h3, p, pre, hr, ul {
+  margin: 0.8rem $side-space;
+}
+
+h1, h2, h3 {
+  word-break: keep-all;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-top: $layout-margin;
+  margin-bottom: $layout-margin;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-top: 3rem;
+  margin-bottom: 0.9rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+  margin-top: 2.1rem;
+}
+
+p {
+}
+
+pre {
+  font-size: 0.8em;
+  margin-bottom: 1rem;
+}
+
+pre.clean {
+  padding: 0px;
+  border: 0px;
+  background-color: inherit;
+  font-size: inherit;
+}
+
+hr {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0px;
+  li {
+    margin-bottom: 0.3em;
+  }
+}
+
+.vspace {
+  margin-bottom: $margin;
+}
+
+// page
+
+.page-header { // bootstrap 에 같은 이름 클래스가 정의되어 있다;
+  max-width: $width;
+  margin: 0px auto $layout-margin;
+  padding: 0px; // overriding bootstrap
+  border-bottom: 1px solid $line-color;
+  @include ac-link;
+}
+
+.page-footer {
+  max-width: $width;
+  margin: $layout-margin auto;
+  padding: 0px; // overriding bootstrap
+  border-top: 1px solid $line-color;
+  ul {
+    margin: 0.3rem auto;
+    padding: 0px;
+    list-style: none;
+    li {
+      display: inline-block;
+      margin-bottom: 0px;
+      padding: 0 5px;
+    }
+  }
+  @include ac-link;
+}
+
+.page-header > .site-name,
+.page-footer > .site-name {
+  font-size: 1.5em;
+  margin: 0.6em auto;
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.page-title {
+  max-width: $width;
+  margin: $layout-margin auto;
+  h1 {
+    font-size: 1.9em;
+    white-space: pre-line;
+    line-height: 180%;
+  }
+}
+
+.page-content {
+  max-width: $width;
+  // 와이드 이미지는 없다고 가정했다.
+  // 이미지가 들어가는 사이트는 섹션별로 폭을 설정해야.
+  margin: $layout-margin auto;
+  text-align: left;
+  p.go-to-index {
+    text-align: center;
+    font-size: 1.3rem;
+    margin: $layout-margin auto;
+    line-height: 350%;
+    a {
+      display:block;
+    }
+  }
+}
+
+.page-content-center {
+  text-align: center;
+  p {
+    white-space: pre-line;
+    margin-bottom: 1.8em;
+  }
+}
+
+.page-content-index {
+  text-align: center;
+  ul {
+    margin-bottom: 4.5rem;
+    li {
+      font-size: 1.1em;
+      margin-bottom: 1em;
+    }
+  }
+}
